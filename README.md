@@ -21,7 +21,7 @@ allowBlank="false" works fine for xtype textfield, but for multifield it always 
 ```
 ### Mark fields as required
 To set fields as required, we only need to add a CSS class to the widget as follows:
-####Multifield
+#### Multifield
 ```xml
 <!-- since this multifield is marked as required (cls="required"), will be checked on beforesubmit -->
 <mfOne 
@@ -31,7 +31,7 @@ To set fields as required, we only need to add a CSS class to the widget as foll
     cls="required"
     xtype="multifield" />
 ```
-####Textfield
+#### Textfield
 ```xml
 <tfTwo 
   	jcr:primaryType="cq:Widget" 
@@ -55,5 +55,15 @@ Note that with
 ```
 We can use **cqDialogValidator.valueIsEmpty(value)** to perfome a validation in onchange event (as mentioned, allowBlank does not work properly in multifield).
 
+## Styling
+This is the default extjs style, but if you want you can create your own one, you just need to consider the css selector **div.x-panel.x-form-invalid**
+```css
+/* provide a better styling if you want! */
+/* this is the default style */
+div.x-panel.x-form-invalid {
+	border-color: #ff7870 !important;
+	border-width: 1px !important;
+}
+```
 ##To be continued
-As i said, this is a very basic validation plugin, and is ment to be extended with other common xtypes. For now, this have solved my problems but I'm sure I'll face some other xtypes issues and then I'll update the script.
+As i said, this is a very basic validation plugin, and is ment to be extended with other common xtypes. For now, this have solved my problems but I'm sure I'll face some other xtypes issues and then I'll update the script. Hope this helps!
