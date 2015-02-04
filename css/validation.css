@@ -1,0 +1,7 @@
+
+/* provide a better styling if you want! */
+/* this is the default style */
+div.x-panel.x-form-invalid {
+	border-color: #ff7870 !important;
+	border-width: 1px !important;
+}

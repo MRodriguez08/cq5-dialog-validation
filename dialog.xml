@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- IMPORTANT: our dialog MUST be of xtype="dialog", other xtypes like panel don't have beforesubmit and loadcontent events -->
+<!-- See http://docs.adobe.com/docs/en/cq/5-6/widgets-api/index.html?class=CQ.Dialog -->
+<jcr:root 
+	xmlns:cq="http://www.day.com/jcr/cq/1.0" 
+	xmlns:jcr="http://www.jcp.org/jcr/1.0"
+	xmlns:nt="http://www.jcp.org/jcr/nt/1.0"	
+	jcr:primaryType="cq:Dialog" 
+	height="400"
+	stateful="false"
+	xtype="dialog">
+	
+	<!-- We should register both beforesubmit and loadcontent handlers -->
+	<!-- beforesubmit: handles beforesubmit event, checking all fields marked as required and preventing default if -->
+	<!-- some of them fails -->
+	<!-- loadcontent: handles on loadcontent event, checking if some of the values is not valid and marking them as invalid -->
+	<!-- this function is needed to update dialog and avoid previous error states -->
+    <listeners 
+    	jcr:primaryType="nt:unstructured"		
+        beforesubmit="function(dialog){	return cqDialogValidator.validateDialog(dialog); }"
+        loadcontent="function(dialog){	return cqDialogValidator.setupDialog(dialog); }"  />
+	
+	<items jcr:primaryType="cq:WidgetCollection">
+		<tabs jcr:primaryType="cq:TabPanel">
+			<items jcr:primaryType="cq:WidgetCollection">	
+        		<mainTab 
+        			jcr:primaryType="cq:Panel"
+        			title="Some Nice Component">
+        			<items jcr:primaryType="cq:WidgetCollection">	
+						
+						<!-- this textfield won't be checked... -->
+						<tfOne
+							jcr:primaryType="cq:Widget" 
+							fieldLabel="Textfield One" 
+							name="./textFieldOne"
+							xtype="textfield" 
+							defaultValue="defaultvalue" />
+
+						<!-- since this multifield is marked as required (cls="required"), will be checked on beforesubmit -->
+						<mfOne 
+							jcr:primaryType="cq:Widget" 
+							fieldLabel="Multifield One"
+							name="./multifieldOne"
+							cls="required"
+							xtype="multifield" />
+							
+						<!-- this multifield won't be checked... -->
+						<mfTwo 
+							jcr:primaryType="cq:Widget" 
+							fieldLabel="Multifield Two"
+							name="./multifieldTwo" 
+							xtype="multifield" />	
+						
+						<!-- this textfield will be checked in on change (note that uses validator with cqDialogValidator.valueIsEmpty(value) -->
+						<!-- and also on beforesubmit with out generic funtion cqDialogValidator.validateDialog(dialog) -->
+						<tfTwo 
+							jcr:primaryType="cq:Widget" 
+							fieldLabel="Textfield Two"
+							name="./textFieldOne"
+							allowBlank="false"
+							cls="required"
+							validator="function(value) {return !cqDialogValidator.valueIsEmpty(value); }"
+							xtype="textfield" />	
+									
+					</items>
+				</mainTab>
+			</items>
+		</tabs>
+	</items>
+</jcr:root>
