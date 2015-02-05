@@ -3,8 +3,9 @@ This simple script provides a basic validation of CQ5 dialogs, since validations
 allowBlank="false" works fine for xtype textfield, but for multifield it always marks the field as invalid (I don't know wy) so, I've decided to implement an on beforesubmit solution.
 
 ## Supported xtypes
-*  [Textfield](http://docs.adobe.com/docs/en/cq/5-6/widgets-api/index.html?class=CQ.Ext.form.TextField)
-*  [Multifield](http://docs.adobe.com/docs/en/cq/5-6/widgets-api/index.html?class=CQ.form.MultiField)
+*  [TextField] (http://docs.adobe.com/docs/en/cq/5-6/widgets-api/index.html?class=CQ.Ext.form.TextField)
+*  [MultiField] (http://docs.adobe.com/docs/en/cq/5-6/widgets-api/index.html?class=CQ.form.MultiField)
+*  [RichText] (http://docs.adobe.com/docs/en/cq/5-6/widgets-api/index.html?class=CQ.form.RichText)
 
 ## Considerations of dialog.xml
 ### Register listeners
@@ -54,6 +55,18 @@ Note that with
   	xtype="textfield" />	
 ```
 We can use **cqDialogValidator.valueIsEmpty(value)** to perfome a validation in onchange event (as mentioned, allowBlank does not work properly in multifield).
+
+#### Richtext
+```xml
+<rtOne
+	jcr:primaryType="cq:Widget"
+	fieldLabel="Rich Text One"
+	name="./richTextOne"
+	xtype="richtext"
+	cls="required"
+	allowBlank="false"/>
+							
+```
 
 ## Styling
 This is the default extjs style, but if you want you can create your own one, you just need to consider the css selector **div.x-panel.x-form-invalid**
