@@ -2,6 +2,21 @@
 This simple script provides a basic validation of CQ5 dialogs, since validations of some xtypes like multifiels are not correctly applied.
 allowBlank="false" works fine for xtype textfield, but for multifield it always marks the field as invalid (I don't know wy) so, I've decided to implement an on beforesubmit solution.
 
+## Plugin functions
+* dialog ( cqJs.dialog )
+  * validate ( cqJs.dialog('validate' , dialog) )
+    * This function should be called on "beforesubmit" event and evalues all required fields. Each required field that is empty is marked as a 'has-error' field.
+  
+  * setup ( cqJs.dialog('setup' , dialog) )
+    * Setup should be fired on 'loadcontent' dialog event and is in charge of checking the previous fields states. Each required field that has validation errors is marked as 'has-error' field.
+
+* validate ( cqJs.validate )
+  * isEmpty ( cqJs.dialog('isEmpty' , value) )
+    * Returns true if a field value is empty considering all supported types.
+ 
+  * notEmpty ( cqJs.dialog('notEmpty' , value) )
+    * Returns true if a field value is NOT empty considering all supported types.
+
 ## Supported xtypes
 *  [TextField] (http://docs.adobe.com/docs/en/cq/5-6/widgets-api/index.html?class=CQ.Ext.form.TextField)
 *  [MultiField] (http://docs.adobe.com/docs/en/cq/5-6/widgets-api/index.html?class=CQ.form.MultiField)
