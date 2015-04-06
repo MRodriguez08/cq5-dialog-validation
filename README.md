@@ -16,9 +16,9 @@ allowBlank="false" works fine for xtype textfield, but for multifield it always 
 	<!-- loadcontent: handles on loadcontent event, checking if some of the values is not valid and marking them as invalid -->
 	<!-- this function is needed to update dialog and avoid previous error states -->
     <listeners 
-    	jcr:primaryType="nt:unstructured"		
-        beforesubmit="function(dialog){	return cqDialogValidator.validateDialog(dialog); }"
-        loadcontent="function(dialog){	return cqDialogValidator.setupDialog(dialog); }"  />
+        jcr:primaryType="nt:unstructured"   
+        beforesubmit="function(dialog){ return cqJs.dialog('validate' , dialog); }"
+        loadcontent="function(dialog){  return cqJs.dialog('setup' , dialog); }"  />
 ```
 ### Mark fields as required
 To set fields as required, we only need to add a CSS class to the widget as follows:
@@ -51,7 +51,7 @@ Note that with
   	name="./textFieldOne"
   	cls="required"
   	allowBlank="false"
-  	validator="function(value) {return !cqDialogValidator.valueIsEmpty(value); }"
+  	validator="function(value) { return cqJs.validate('notEmpty' , value); }"
   	xtype="textfield" />	
 ```
 We can use **cqDialogValidator.valueIsEmpty(value)** to perfome a validation in onchange event (as mentioned, allowBlank does not work properly in multifield).

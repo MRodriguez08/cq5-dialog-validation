@@ -18,8 +18,8 @@
 	<!-- this function is needed to update dialog and avoid previous error states -->
     <listeners 
     	jcr:primaryType="nt:unstructured"		
-        beforesubmit="function(dialog){	return cqDialogValidator.validateDialog(dialog); }"
-        loadcontent="function(dialog){	return cqDialogValidator.setupDialog(dialog); }"  />
+        beforesubmit="function(dialog){	return cqJs.dialog('validate' , dialog); }"
+    	loadcontent="function(dialog){	return cqJs.dialog('setup' , dialog); }"  />
 	
 	<items jcr:primaryType="cq:WidgetCollection">
 		<tabs jcr:primaryType="cq:TabPanel">
@@ -60,7 +60,7 @@
 							name="./textFieldOne"
 							allowBlank="false"
 							cls="required"
-							validator="function(value) {return !cqDialogValidator.valueIsEmpty(value); }"
+							validator="function(value) { return cqJs.validate('notEmpty' , value); }"
 							xtype="textfield" />	
 									
 					</items>
@@ -69,3 +69,4 @@
 		</tabs>
 	</items>
 </jcr:root>
+
